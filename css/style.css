@@ -26,8 +26,16 @@
     
 }
 
-.logo{
-    
+.flotante{
+    display: flex;
+    justify-content: center;
+    align-content:center ;
+    width: 60px;
+    height: 60px;
+    font-size: xx-large;
+    position:fixed;
+    bottom:80px;
+    right:250px;
 }
 
 
@@ -41,6 +49,9 @@
     height: 600px;
 }
 
+tbody tr{
+    cursor: pointer;
+}
 
 
 

@@ -29,3 +29,28 @@ function addFormHijos(){
 
 }
 
+function addConyugeForm(){
+    document.getElementById("conyugeDiv").innerHTML='';
+    if(document.getElementById("conyugeCheck").checked) {
+        document.getElementById("conyugeDiv").innerHTML=
+        `<div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputNombreConyuge">Nombre Conyuge</label>
+          <input type="text" class="form-control" id="inputNombreConyuge" placeholder="Nombre">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputApellidoConyuge">Apellido</label>
+          <input type="password" class="form-control" id="inputApellidoConyuge" placeholder="Apellido">
+        </div>
+      </div>
+
+      <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputDNIConyuge">DNI</label>
+                <input type="text" class="form-control" id="inputDNIConyuge" placeholder="DNI">
+              </div>
+              
+            </div>`
+    }
+}
+

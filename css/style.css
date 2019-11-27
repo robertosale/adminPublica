@@ -54,7 +54,10 @@ tbody tr{
 }
 
 
-
+.headerAddEmp{
+    display: flex;
+    justify-content: flex-start;
+}
 
 
 

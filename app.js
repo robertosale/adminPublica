@@ -30,7 +30,7 @@ app.listen(3000,()=>{
 });
 
 
-app.get('/request',(req,res)=> {
+app.get('/busquedaempleados',(req,res)=> {
     var result;
     
     mysqlConnection.query(`SELECT nombre, anio FROM Pelicula

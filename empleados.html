@@ -44,7 +44,7 @@
                           </div>
                         </div>
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Nombre o DNI" aria-label="Buscar">
+                            <input class="form-control mr-sm-2" type="search" id='buscador'placeholder="Nombre o DNI" aria-label="Buscar">
                             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
                           </form>
                       </nav>
@@ -70,36 +70,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                    
-                                <td>Thomas Hardy</td>
-                                <td>33456789</td>
-                                <td>89 Chiaroscuro Rd, Portland, USA</td>
-                                <td>(171) 555-2222</td>
-                                <td>
-                                  <div class="iconos">
-                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                                  
-
-                                    <div class="dropdown">
-                                      <a href="#" class="delete" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                      aria-expanded="false"><i class="material-icons" title="Mas...">&#xE896;</i></a> 
-
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Agregar Falta</a>
-                                          <a class="dropdown-item" href="#">Agregar Familiar</a>
-                                          <a class="dropdown-item" href="#">Agregar Horas Extra</a>
-                                          <a class="dropdown-item" href="#">Agregar Licencia</a>
-                                          <a class="dropdown-item" href="#">Boleta de Sueldo</a>
-                                          <div class="dropdown-divider"></div>
-                                          <a class="dropdown-item" href="#">Borrar</a>
-                                          
-                                      </div>
-
-                                    </div>
-                                  </div>
-                                </td>
-                            </tr>
+                            <div id="resultado"></div>
                             
                         </tbody>
                     </table>
@@ -179,7 +150,7 @@
     </div>
 
     
-
+    <script src="./js/empleados.js"></script>
     <script src="/js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

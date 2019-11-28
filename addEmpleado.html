@@ -13,7 +13,7 @@
     
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/styleAddEmpleado.css">
-    <script src="/js/scriptAdmin.js"></script>
+    
 </head>
 <body>
 
@@ -35,16 +35,16 @@
         <div class="content">
             <h2>Agregar Empleado</h2>
 
-                <form>
+                <form id="empleadoForm" method="POST" action="/empleado/">
 
                         <div class="form-row">
                           <div class="form-group col-md-6">
-                            <label for="inputEmail4">Nombre</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Nombre">
+                            <label for="empleadoNombre">Nombre</label>
+                            <input type="text" class="form-control" name="empleadoNombre" id="empleadoNombre" placeholder="Nombre" required>
                           </div>
                           <div class="form-group col-md-6">
-                            <label for="inputPassword4">Apellido</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Apellido">
+                            <label for="empleadoApellido">Apellido</label>
+                            <input type="text" class="form-control" name="empleadoApellido" id="empleadoApellido" placeholder="Apellido" required>
                           </div>
                         </div>
 
@@ -54,30 +54,30 @@
 
                         <div class="form-row">
                                 <div class="form-group col-md-6">
-                                  <label for="inputEmail4">DNI</label>
-                                  <input type="email" class="form-control" id="inputEmail4" placeholder="DNI">
+                                  <label for="empleadoDNI">DNI</label>
+                                  <input type="text" class="form-control" id="empleadoDNI" placeholder="DNI" name="empleadoDNI" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                  <label for="inputPassword4">CUIL</label>
-                                  <input type="password" class="form-control" id="inputPassword4" placeholder="CUIL">
+                                  <label for="empleadoCUIL">CUIL</label>
+                                  <input type="text" class="form-control" id="empleadoCUIL" placeholder="CUIL" name="empleadoCUIL" required>
                                 </div>
                               </div>
 
 
                         <div class="form-group">
-                          <label for="inputAddress">Dirección</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="Dirección">
+                          <label for="empleadoDireccion">Dirección</label>
+                          <input type="text" class="form-control" id="empleadoDireccion" placeholder="Dirección" name="empleadoDireccion" required>
                         </div>
                         
 
 
                         <div class="form-row">
                           <div class="form-group col-md-6">
-                            <label for="inputPuesto">Puesto</label>
+                            <label for="empleadoPuesto">Puesto</label>
                             <div class="input-group mb-3">
-                                    <select id="inputPuesto" class="form-control">
+                                    <select id="empleadoPuesto" class="form-control" name="empleadoPuesto">
                                             <option selected>Jefe</option>
-                                            <option value ="Ordenanza">Ordenanza</option>
+                                            <option >Ordenanza</option>
                                            </select>
                                     
                                     <div class="input-group-append">
@@ -88,9 +88,9 @@
                           </div>
 
                           <div class="form-group col-md-6">
-                                <label for="inputReparticion">Reparticion</label>
+                                <label for="empleadoReparticion">Reparticion</label>
                                 <div class="input-group mb-3">
-                                        <select id="inputReparticion" class="form-control">
+                                        <select id="empleadoReparticion" class="form-control" name="empleadoReparticion">
                                                 <option selected>Jefe</option>
                                                 <option value ="Ordenanza">Ordenanza</option>
                                                    </select>
@@ -107,8 +107,8 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-2">
-                                <label for="inputAddress">Hijos</label>
-                                <input type="number" class="form-control" id="inputHijos" placeholder="0" onchange="addFormHijos();">                         
+                                <label for="empleadoHijos">Hijos</label>
+                                <input type="number" class="form-control" id="inputHijos" placeholder="0" onchange="addFormHijos();" name="empleadoCantHijos">                         
                                                 
                             </div>
                             
@@ -132,7 +132,7 @@
 
 
                         <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Registrar</button>
+                                <button  type="submit" class="btn btn-primary">Registrar</button>
                         </div>
                         
             </form>

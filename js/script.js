@@ -10,18 +10,18 @@ function addFormHijos(){
         `<div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputNombreHijo${i}">Nombre Hijo ${i+1}</label>
-          <input type="text" class="form-control" id="inputNombreHijo${i}" placeholder="Nombre">
+          <input type="text" class="form-control" name="nombreHijo${i}" placeholder="Nombre">
         </div>
         <div class="form-group col-md-6">
           <label for="inputApellidoHijo${i}">Apellido</label>
-          <input type="password" class="form-control" id="inputApellidoHijo${i}" placeholder="Apellido">
+          <input type="text" class="form-control" name="apellidoHijo${i}" placeholder="Apellido">
         </div>
       </div>
 
       <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputDNIHijo${i}">DNI</label>
-                <input type="text" class="form-control" id="inputDNIHijo${i}" placeholder="DNI">
+                <input type="text" class="form-control" name="DNIHijo${i}" placeholder="DNI">
               </div>
               
             </div>`
@@ -36,21 +36,23 @@ function addConyugeForm(){
         `<div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputNombreConyuge">Nombre Conyuge</label>
-          <input type="text" class="form-control" id="inputNombreConyuge" placeholder="Nombre">
+          <input type="text" class="form-control" name="nombreConyuge" placeholder="Nombre">
         </div>
         <div class="form-group col-md-6">
           <label for="inputApellidoConyuge">Apellido</label>
-          <input type="password" class="form-control" id="inputApellidoConyuge" placeholder="Apellido">
+          <input type="text" class="form-control" name="apellidoConyuge" placeholder="Apellido">
         </div>
       </div>
 
       <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputDNIConyuge">DNI</label>
-                <input type="text" class="form-control" id="inputDNIConyuge" placeholder="DNI">
+                <input type="text" class="form-control" name="DNIConyuge" placeholder="DNI">
               </div>
               
             </div>`
     }
 }
+
+
 

@@ -30,7 +30,6 @@ function buscar(criterio = document.getElementById('buscador').value){
                                 <td>(171) 555-2222</td>
                                 <td>
                                   <div class="iconos">
-                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
                                   
 
                                     <div class="dropdown">
@@ -38,10 +37,10 @@ function buscar(criterio = document.getElementById('buscador').value){
                                       aria-expanded="false"><i class="material-icons" title="Mas...">&#xE896;</i></a> 
 
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Agregar Falta</a>
-                                          <a class="dropdown-item" href="#">Agregar Familiar</a>
-                                          <a class="dropdown-item" href="#">Agregar Horas Extra</a>
-                                          <a class="dropdown-item" href="#">Agregar Licencia</a>
+                                          <a class="dropdown-item" href="#addFaltaModal" data-toggle="modal">Agregar Falta</a>
+                                          <a class="dropdown-item" href="#agregarFamiliarModal" data-toggle="modal">Agregar Familiar</a>
+                                          <a class="dropdown-item" href="#agregarHorasExtraModal" data-toggle="modal">Agregar Horas Extra</a>
+                                          <a class="dropdown-item" href="#agregarLicenciaModal" data-toggle="modal">Agregar Licencia</a>
                                           <a class="dropdown-item" href="#">Boleta de Sueldo</a>
                                           <div class="dropdown-divider"></div>
                                           <a class="dropdown-item" href="javascript:borrar(${row.idAgente})">Borrar</a>

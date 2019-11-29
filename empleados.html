@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     <link rel="stylesheet" href="css/style.css">
-    <script src="/js/scriptAdmin.js"></script>
+    
 </head>
 <body>
 
@@ -43,9 +43,9 @@
                            
                           </div>
                         </div>
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" id='buscador'placeholder="Nombre o DNI" aria-label="Buscar">
-                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                        <form class="form-inline" action="javascript:buscar();">
+                            <input class="form-control mr-sm-2" type="search" id='buscador'placeholder="Apellido o DNI" aria-label="Buscar">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" >Buscar</button>
                           </form>
                       </nav>
 
@@ -61,16 +61,17 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                    
+                                
                                 <th>Nombre</th>
                                 <th>DNI</th>
-                    <th>Repartición</th>
+                                <th>Repartición</th>
                                 <th>Interno</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <div id="resultado"></div>
+                        <tbody id="resultados">
+                            
+                            
                             
                         </tbody>
                     </table>

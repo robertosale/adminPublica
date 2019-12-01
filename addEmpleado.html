@@ -76,8 +76,8 @@
                             <label for="empleadoPuesto">Puesto</label>
                             <div class="input-group mb-3">
                                     <select id="empleadoPuesto" class="form-control" name="empleadoPuesto">
-                                            <option selected>Jefe</option>
-                                            <option >Ordenanza</option>
+                                      
+                                            
                                            </select>
                                     
                                     <div class="input-group-append">
@@ -91,9 +91,11 @@
                                 <label for="empleadoReparticion">Reparticion</label>
                                 <div class="input-group mb-3">
                                         <select id="empleadoReparticion" class="form-control" name="empleadoReparticion">
-                                                <option selected>Jefe</option>
-                                                <option value ="Ordenanza">Ordenanza</option>
+                                                
                                                    </select>
+                                                   <div class="input-group-append">
+                                                      <button class="btn btn-outline-secondary" type="button" onclick="window.location.href = './addReparticion.html';">Crear Reparticion</button>
+                                                    </div>
                                         
                                         
                                 </div>   
@@ -103,29 +105,7 @@
                           
                         </div>
 
-                        
-
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <label for="empleadoHijos">Hijos</label>
-                                <input type="number" class="form-control" id="inputHijos" placeholder="0" onchange="addFormHijos();" name="empleadoCantHijos">                         
-                                                
-                            </div>
-                            
-                        </div>
-
-                        <div id="hijos"> </div>
-                                        
-                        <div class="form-group">
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="" id="conyugeCheck" onchange="addConyugeForm();">
-                                  <label class="form-check-label" for="invalidCheck2">
-                                    Conyuge
-                                  </label>
-                            </div>
-                        </div>
-
-                        <div id="conyugeDiv"> </div>
+                       
 
 
                     
@@ -143,23 +123,24 @@
 <div id="modalPuesto" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form>
+            <form action="javascript:enviarPuesto()">
               <div class="modal-header">						
                 <h4 class="modal-title">Agregar Puesto</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
               <div class="modal-body">					
                 <div class="form-group">
+                  
                   <label>Nombre Puesto</label>
-                  <input type="text" class="form-control" required>
+                  <input type="text" class="form-control" name="nombrePuesto" id="nombrePuesto" required>
                 </div>
                 <div class="form-group">
                     <label>Numero de Decreto</label>
-                    <input type="text" class="form-control" required>
+                    <input type="text" class="form-control" name="decreto" id="decreto" required>
                 
                 
                     <label>Fecha</label>
-                    <input type="text" class="form-control" required>
+                    <input type="date" class="form-control" name="fechaPuesto" id="fechaPuesto" required>
                 </div>
                 					
               </div>
@@ -191,6 +172,7 @@
 
 
 <script src="/js/script.js"></script>
+<script src="/js/cargarPuestos.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

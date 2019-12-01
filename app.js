@@ -33,8 +33,24 @@ app.listen(3000,()=>{
 app.get('/busquedaempleados',(req,res)=> {
     var result;
     console.log("Entro a Busquedaempleados")
-    mysqlConnection.query(`SELECT idAgente, nombre, apellido, DNI  FROM Agente
-                        WHERE LOWER(apellido) LIKE \'%${req.query.busqueda.toLowerCase()}%\' ORDER BY apellido ASC`,(err,result,fields)=>{
+    mysqlConnection.query(`SELECT idAgente, empleadoNombre, empleadoApellido, DNI, nombreReparticion, 
+                        interno FROM vistaEmpleado
+                        WHERE LOWER(empleadoApellido) LIKE \'%${req.query.busqueda.toLowerCase()}%\' OR
+                        DNI LIKE \'%${parseInt(req.query.busqueda)}%\'
+                        ORDER BY empleadoApellido ASC`,(err,result,fields)=>{
+        
+                            res.send(result);
+                            console.log(result);
+                    
+                        });
+});
+
+app.get('/busquedareparticiones',(req,res)=> {
+    var result;
+    console.log("Entro a BusquedaReparticiones")
+    mysqlConnection.query(`SELECT idReparticion, nombreReparticion, nombreDepartamento FROM vistaReparticion
+                        WHERE LOWER(nombreReparticion) LIKE \'%${req.query.busqueda.toLowerCase()}%\' 
+                        ORDER BY nombreReparticion ASC`,(err,result,fields)=>{
         
                             res.send(result);
                             console.log(result);
@@ -43,12 +59,41 @@ app.get('/busquedaempleados',(req,res)=> {
 });
 
 
+app.get('/busquedapuestos',(req,res)=> {
+    var result;
+    console.log("Entro a Busquedapuestos")
+    mysqlConnection.query(`SELECT idPuesto, nombre FROM Puesto`,(err,result,fields)=>{
+        
+                            res.send(result);
+                            console.log(result);
+                    
+                        });
+});
+
+
+app.post('/agregarpuesto/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    mysqlConnection.query(`INSERT INTO Puesto(nombre, numeroDecreto, fecha)
+    values( '${req.body.nombrePuesto}', 
+             ${parseInt(req.body.decreto)},
+            '${req.body.fecha}' )`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+    
+    
+  
+
+});
 
 
 app.post('/addempleado/',urlencodedParser,(req,res)=>{
     console.log(req.body);
-    mysqlConnection.query(`INSERT INTO Agente(nombre, apellido, DNI, CUIL, direccion)
-    values( '${req.body.empleadoNombre}', 
+    mysqlConnection.query(`INSERT INTO Agente(idPuesto, idReparticion, nombre, apellido, DNI, CUIL, direccion)
+    values( ${parseInt(req.body.empleadoPuesto)},
+            ${parseInt(req.body.empleadoReparticion)},
+            '${req.body.empleadoNombre}', 
             '${req.body.empleadoApellido}',
             ${parseInt(req.body.empleadoDNI)},
             ${parseInt(req.body.empleadoCUIL)},
@@ -73,5 +118,147 @@ app.delete('/deleteempleado/:id',(req,res)=>{
     
             res.redirect('.');
     
+
+});
+
+app.post('/llegadatarde/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    mysqlConnection.query(`INSERT INTO Inasistencia(fecha, tipo, idAgente)
+    values( '${req.body.fecha}', 
+            '${req.body.tipo}',
+            ${parseInt(req.body.idEmpleado)} )`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+
+    console.log(req.body.idEmpleado);   
+    
+
+});
+
+
+app.post('/familiar/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    mysqlConnection.query(`INSERT INTO Familiar(idAgente, nombre, apellido, DNI, esConyuge)
+    values( '${parseInt(req.body.idEmpleado)}', 
+            '${req.body.nombre}',
+            '${req.body.apellido}',
+            ${parseInt(req.body.dni)},
+            ${parseInt(req.body.conyuge)} )`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+
+    console.log("Familiar");   
+    
+
+});
+
+
+app.post('/horasextra/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    mysqlConnection.query(`INSERT INTO Horasextra(idAgente, fecha, cantidad)
+    values( '${parseInt(req.body.idEmpleado)}', 
+            '${req.body.nombre}',
+             ${parseInt(req.body.cantidad)} )`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+
+    console.log(req.body.idEmpleado);   
+    
+
+});
+
+
+app.post('/licencia/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    mysqlConnection.query(`INSERT INTO Licencia(idAgente, fecha, cantidad, razon)
+    values( '${parseInt(req.body.idEmpleado)}', 
+            '${req.body.fecha}',
+             ${parseInt(req.body.cantidad)},
+             '${req.body.razon}' )`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+
+    console.log(req.body.razon);   
+    
+
+});
+
+
+app.post('/estadoempleado/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    mysqlConnection.query(`UPDATE Agente SET estado = '${req.body.estado}' 
+            WHERE idAgente = ${parseInt(req.body.idEmpleado)}`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+
+    console.log(req.body.idEmpleado);   
+    
+
+});
+
+app.post('/antiguedadempleado/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    mysqlConnection.query(`UPDATE Agente SET antiguedad = '${parseInt(req.body.antiguedad)}' 
+            WHERE idAgente = ${parseInt(req.body.idEmpleado)}`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+
+    console.log(req.body.idEmpleado);   
+    
+
+});
+
+
+app.get('/busquedadepartamentos',(req,res)=> {
+    var result;
+    console.log("Entro a Busquedadepartamentos")
+    mysqlConnection.query(`SELECT idDepartamento, nombre FROM Departamento`,(err,result,fields)=>{
+        
+                            res.send(result);
+                            console.log(result);
+                    
+                        });
+});
+
+
+app.post('/agregardepartamento/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    mysqlConnection.query(`INSERT INTO Departamento(nombre, interno)
+    values( '${req.body.nombre}', 
+             ${parseInt(req.body.interno)} )`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+    
+    
+  
+
+});
+
+app.post('/addreparticion/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    mysqlConnection.query(`INSERT INTO Reparticion(nombre, idDepartamento)
+    values( '${req.body.nombre}', 
+             ${parseInt(req.body.departamento)} )`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+            res.redirect('/reparticiones.html');
+    
+  
 
 });

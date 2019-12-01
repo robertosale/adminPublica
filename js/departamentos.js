@@ -28,6 +28,8 @@ function buscar(criterio = document.getElementById('buscador').value){
                                 <td>${row.nombreDepartamento} </td>
                                 <td>${row.apellidoJefe}, ${row.nombreJefe}</td>
                                 <td>${row.telefono}</td>
+                                <td><a class="delete" href="javascript:borrar(${row.idReparticion})" aria-haspopup="true"
+                                aria-expanded="false"><i class="material-icons" title="Borrar">delete_forever</i></a></td>
                                 
                                 
                             </tr>`;
@@ -48,4 +50,32 @@ function buscar(criterio = document.getElementById('buscador').value){
         xhttp.withCredentials=true;
         xhttp.send();
 }
+
+function borrar(clicked_id){
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = ()=>{
+        if(xhttp.readyState == 4 && xhttp.status ==200){
+            
+                           
+            };
+            
+        };
+    
+
+
+    let url = new URL(`http://localhost:3000/deletereparticion/${clicked_id}`);  //armo la url, esta es la base
+    
+
+    console.log(url);
+    console.log(clicked_id);
+    xhttp.open("DELETE",url,true);
+    xhttp.withCredentials=true;
+    xhttp.send();
+    buscar();
+
+
+    
+}
+
 

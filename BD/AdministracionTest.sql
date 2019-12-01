@@ -15,6 +15,7 @@ CREATE TABLE Agente (
     direccion VARCHAR(70),
     antiguedad INT,
     estado VARCHAR(20),
+    telefono varchar(20),
     primary key(idAgente,idPuesto,idReparticion),
     foreign key(idPuesto) references Puesto(idPuesto),
     foreign key(idReparticion) references Reparticion(idReparticion)
@@ -114,5 +115,14 @@ create view vistaEmpleado as
     interno
     from Agente join Reparticion on Agente.idReparticion = Reparticion.idReparticion
 				join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento;
+                
+                
+create view vistaJefe as
+	select Reparticion.idReparticion idReparticion, Reparticion.nombre nombreReparticion, Departamento.nombre nombreDepartamento,
+    Agente.apellido jefeApellido, Agente.nombre jefeNombre
+    from Reparticion join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento
+					 join Agente on Agente.idReparticion = Reparticion.idReparticion
+                     join Puesto on Agente.idPuesto = Puesto.idPuesto
+                     where
 
 INSERT INTO Agente(nombre, apellido, DNI, CUIL, direccion) values('Adrian','Perea',34134444,2093939412,'Malvinas 22');

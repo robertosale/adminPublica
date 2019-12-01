@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const express = require('express');
 const bodyparser = require('body-parser');
+
 var urlencodedParser = bodyparser.urlencoded({ extended: true });
 const url = require('url');
 
@@ -9,6 +10,9 @@ let app = express();
 app.use(bodyparser.json());
 
 app.use(express.static('.'));
+
+
+
 
 
 let mysqlConnection = mysql.createConnection({
@@ -90,14 +94,15 @@ app.post('/agregarpuesto/',urlencodedParser,(req,res)=>{
 
 app.post('/addempleado/',urlencodedParser,(req,res)=>{
     console.log(req.body);
-    mysqlConnection.query(`INSERT INTO Agente(idPuesto, idReparticion, nombre, apellido, DNI, CUIL, direccion)
+    mysqlConnection.query(`INSERT INTO Agente(idPuesto, idReparticion, nombre, apellido, DNI, CUIL, direccion, telefono)
     values( ${parseInt(req.body.empleadoPuesto)},
             ${parseInt(req.body.empleadoReparticion)},
             '${req.body.empleadoNombre}', 
             '${req.body.empleadoApellido}',
             ${parseInt(req.body.empleadoDNI)},
             ${parseInt(req.body.empleadoCUIL)},
-            '${req.body.empleadoDireccion}' )`,(err,result,fields)=>{
+            '${req.body.empleadoDireccion}',
+            '${req.body.empleadoTelefono}' )`,(err,result,fields)=>{
                 console.log(result);
                 console.log(err);
             }
@@ -111,6 +116,19 @@ app.post('/addempleado/',urlencodedParser,(req,res)=>{
 app.delete('/deleteempleado/:id',(req,res)=>{
     console.log(req.params.id);
      mysqlConnection.query(`DELETE FROM Agente WHERE idAgente=${req.params.id}`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            ); 
+    
+            res.redirect('.');
+    
+
+});
+
+app.delete('/deletereparticion/:id',(req,res)=>{
+    console.log(req.params.id);
+     mysqlConnection.query(`DELETE FROM Reparticion WHERE idReparticion=${req.params.id}`,(err,result,fields)=>{
                 console.log(result);
                 console.log(err);
             }
@@ -250,6 +268,7 @@ app.post('/agregardepartamento/',urlencodedParser,(req,res)=>{
 
 app.post('/addreparticion/',urlencodedParser,(req,res)=>{
     console.log(req.body);
+    backURL=req.header('Referer') || '/';
     mysqlConnection.query(`INSERT INTO Reparticion(nombre, idDepartamento)
     values( '${req.body.nombre}', 
              ${parseInt(req.body.departamento)} )`,(err,result,fields)=>{
@@ -257,8 +276,25 @@ app.post('/addreparticion/',urlencodedParser,(req,res)=>{
                 console.log(err);
             }
             );
-            res.redirect('/reparticiones.html');
+            
+            res.redirect('../reparticiones.html');
     
+  
+
+});
+
+app.post('/addreparticionemp/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    backURL=req.header('Referer') || '/';
+    mysqlConnection.query(`INSERT INTO Reparticion(nombre, idDepartamento)
+    values( '${req.body.nombre}', 
+             ${parseInt(req.body.departamento)} )`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+            
+    res.redirect('../addEmpleado.html');
   
 
 });

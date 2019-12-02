@@ -3,7 +3,6 @@ create schema AdministracionTest;
 use AdministracionTest;
 
 
-drop table Agente;
 CREATE TABLE Agente (
     idAgente INT NOT NULL AUTO_INCREMENT,
     idPuesto int,
@@ -13,8 +12,8 @@ CREATE TABLE Agente (
     nombre VARCHAR(45),
     apellido VARCHAR(45),
     direccion VARCHAR(70),
-    antiguedad INT,
-    estado VARCHAR(20),
+    antiguedad INT DEFAULT 0,
+    estado VARCHAR(20) DEFAULT 'Transitorio',
     telefono varchar(20),
     primary key(idAgente,idPuesto,idReparticion),
     foreign key(idPuesto) references Puesto(idPuesto),
@@ -24,7 +23,8 @@ CREATE TABLE Agente (
 
 
 
-drop table Inasistencia;
+
+
 
 create table Inasistencia(
 	idInasistencia int not null auto_increment ,
@@ -49,7 +49,7 @@ create table Familiar(
     foreign key(idAgente) references Agente(idAgente) ON DELETE CASCADE
 );
 
-drop table Familiar;
+
 
 create table Horasextra(
 	idHorasextra int not null auto_increment,
@@ -60,7 +60,7 @@ create table Horasextra(
     foreign key(idAgente) references Agente(idAgente) ON DELETE CASCADE
     );
     
-    drop table Horasextra;
+   
     
 create table Licencia(
 	idLicencia int not null auto_increment,
@@ -72,7 +72,7 @@ create table Licencia(
     foreign key(idAgente) references Agente(idAgente) ON DELETE CASCADE
     );
     
-    drop table Licencia;
+    
     
 create table Puesto(
 	idPuesto int not null auto_increment,    
@@ -82,7 +82,7 @@ create table Puesto(
     primary key(idPuesto)
     );
     
-    drop table Puesto;
+   
     
 create table Reparticion(
 	idReparticion int not null auto_increment,
@@ -104,17 +104,23 @@ create table Departamento(
 
 select * from Agente;
 
-
+create view vistaLicencia as
+	select fecha, cantidad, razon, nombre,apellido from
+    Agente join Licencia on Agente.idAgente = Licencia.idAgente;
 
 create view vistaReparticion as
 	select Reparticion.idReparticion idReparticion, Reparticion.nombre nombreReparticion, Departamento.nombre nombreDepartamento
     from Reparticion join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento;
-                
+    
+       
+             
 create view vistaEmpleado as
-	select idAgente, Agente.apellido empleadoApellido, Agente.nombre empleadoNombre, DNI, Reparticion.nombre nombreReparticion,
-    interno
+	select Agente.idAgente idAgente, Agente.apellido empleadoApellido, Agente.nombre empleadoNombre, Agente.DNI DNI, CUIL,
+    direccion, telefono, estado, antiguedad, Puesto.nombre puestoNombre, numeroDecreto, Puesto.fecha puestoFecha, 
+    Reparticion.nombre nombreReparticion,interno
     from Agente join Reparticion on Agente.idReparticion = Reparticion.idReparticion
-				join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento;
+				join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento
+                join Puesto on Puesto.idPuesto = Agente.idPuesto;
                 
                 
 create view vistaJefe as
@@ -122,7 +128,7 @@ create view vistaJefe as
     Agente.apellido jefeApellido, Agente.nombre jefeNombre
     from Reparticion join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento
 					 join Agente on Agente.idReparticion = Reparticion.idReparticion
-                     join Puesto on Agente.idPuesto = Puesto.idPuesto
-                     where
+                     join Puesto on Agente.idPuesto = Puesto.idPuesto;
+                     
 
-INSERT INTO Agente(nombre, apellido, DNI, CUIL, direccion) values('Adrian','Perea',34134444,2093939412,'Malvinas 22');
+

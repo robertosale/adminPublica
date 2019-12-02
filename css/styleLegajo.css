@@ -1,0 +1,8 @@
+.sideby{
+    display: flex;
+    justify-content: space-between;
+}
+
+hr{
+    margin: 5px;
+}

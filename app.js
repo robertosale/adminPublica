@@ -33,6 +33,7 @@ app.listen(3000,()=>{
     console.log("Express is running at port 3000");
 });
 
+app.get('/',(req,res)=> {res.redirect('../empleados.html')});
 
 app.get('/busquedaempleados',(req,res)=> {
     var result;
@@ -297,4 +298,42 @@ app.post('/addreparticionemp/',urlencodedParser,(req,res)=>{
     res.redirect('../addEmpleado.html');
   
 
+});
+
+
+app.get('/getlegajo/:id',(req,res)=> {
+    var result;
+    console.log("Entro a Busquedadepartamentos" + req.params.id);
+    res.redirect(`../legajo.html?id=${req.params.id}`);
+    
+});
+
+
+app.get('/legajoempleado',(req,res)=> {
+    var result;
+    console.log("Entro a legajoempleado")
+    mysqlConnection.query(`SELECT idAgente, empleadoNombre, empleadoApellido, DNI, nombreReparticion, 
+                        interno, DNI, CUIL, direccion, telefono, estado, antiguedad, puestoNombre,
+                        nombreReparticion
+                        FROM vistaEmpleado
+                        WHERE idAgente = ${req.query.busqueda}`,(err,result,fields)=>{
+        
+                            res.send(result);
+                            console.log(result);
+                    
+                        });
+});
+
+
+app.get('/licenciasempleado',(req,res)=> {
+    var result;
+    console.log("Entro a legajoempleado")
+    mysqlConnection.query(`SELECT fecha,cantidad,razon
+                        FROM vistaLicencia
+                        WHERE idAgente = ${req.query.busqueda}`,(err,result,fields)=>{
+        
+                            res.send(result);
+                            console.log(req.query.busqueda);
+                    
+                        });
 });

@@ -23,8 +23,9 @@ function buscar(criterio = document.getElementById('buscador').value){
                     document.getElementById('resultados').innerHTML += `
 
                             <tr>
+                            
                                 
-                                <td>${row.empleadoApellido}, ${row.empleadoNombre} </td>
+                                <td><a href="/getlegajo/${row.idAgente}">${row.empleadoApellido}, ${row.empleadoNombre} </a> </td>
                                 <td>${row.DNI}</td>
                                 <td>${row.nombreReparticion}</td>
                                 <td>${row.interno}</td>

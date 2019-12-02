@@ -157,9 +157,9 @@
                         <label for="tipoLlegadaTarde">Tipo Inasistencia</label>
                         <div class="input-group mb-3">
                             <select id="tipoLlegadaTarde" class="form-control" name="tipoLlegadaTarde">
-                                    <option value="tarde" selected>Llegada Tarde</option>
-                                    <option value ="justificada">Inasistencia Justificada</option>
-                                    <option value ="injustificada">Inasistencia Injustificada</option>
+                                    <option value="Llegada Tarde" selected>Llegada Tarde</option>
+                                    <option value ="Falta Justificada">Inasistencia Justificada</option>
+                                    <option value ="Falta Injustificada">Inasistencia Injustificada</option>
                                        </select>
                             
                             
@@ -208,6 +208,11 @@
                       <div class="form-group">
                         <label>DNI</label>
                         <input type="text" class="form-control" id="familiarDNI"required>
+                      </div>
+
+                      <div class="form-group">
+                        <label>Edad</label>
+                        <input type="number" class="form-control" id="familiarEdad"required>
                       </div>
 
                       <div class="form-group">
@@ -319,6 +324,60 @@
                 </div>
               </div>
 
+            <!-- Agregar Licencia Modal HTML -->
+
+            <div id="agregarLicenciaModal" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form action="javascript:enviarLicencia()">
+                      <div class="modal-header">						
+                        <h4 class="modal-title">Agregar Licencia</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      </div>
+                      <div class="modal-body">					
+                          
+                        
+                        <div class="form-group">
+                          <input type="hidden" id="idEmpleado" name="idEmpleado" value="">
+                          <label for="fecha">Fecha</label>
+                          <input type="date" id="fechaLicencia" class="form-control"   required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad de Dias</label>
+                            <input type="number" id="cantidadLicencia" class="form-control"   required>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="empleadoNombre">Tipo Licencia</label>
+                              <div class="input-group mb-3">
+                                  <select id="razonLicencia" class="form-control" name="empleadoReparticion">
+                                          <option value="Enfermedad" selected>Enfermedad</option>
+                                          <option value="Accidente">Accidente Laboral</option>
+                                          <option value="Matrimonio">Matrimonio</option>
+                                          <option value="Paternidad">Paternidad</option>
+                                          <option value="Adopcion">Adopción</option>
+                                          <option value="Obligaciones Militares">Obligaciones Militares</option>
+                                          <option value="Capacitacion">Capacitación</option>
+                                          <option value="Otras Razones">Razones Particulares</option>
+                                             </select>
+                                  
+                                  
+                            </div>  
+                          </div>
+                            
+                                  
+                      </div>
+                      <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                        <input type="submit" class="btn btn-info" value="Guardar">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+
 
               <!-- estado Modal HTML -->
 
@@ -339,6 +398,7 @@
                           <div class="input-group mb-3">
                               <select id="estadoEmpleado" class="form-control" name="empleadoReparticion">
                                       <option value="Permanente" selected>Permanente</option>
+                                      <option value="Temporario">Temporario</option>
                                       <option value="Transitorio">Transitorio</option>
                                       
                                          </select>
@@ -392,6 +452,42 @@
                   </div>
                 </div>
               </div>
+
+
+              <!-- Agregar Titulo Modal HTML -->
+
+            <div id="agregarTituloModal" class="modal fade">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form action="javascript:enviarTitulo()">
+                    <div class="modal-header">						
+                      <h4 class="modal-title">Agregar Título</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">					
+                        
+                      
+                      <div class="form-group">
+                        <input type="hidden" id="idEmpleado" name="idEmpleado" value="">
+                        <label for="fechaExtra">Titulo</label>
+                        <input type="text" id="nombreTitulo" class="form-control"   required>
+                      </div>
+
+                                                
+                                
+                    </div>
+                    <div class="modal-footer">
+                      <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                      <input type="submit" class="btn btn-info" value="Guardar">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+
+            
 
 
 

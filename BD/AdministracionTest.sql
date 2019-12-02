@@ -16,8 +16,8 @@ CREATE TABLE Agente (
     estado VARCHAR(20) DEFAULT 'Transitorio',
     telefono varchar(20),
     primary key(idAgente,idPuesto,idReparticion),
-    foreign key(idPuesto) references Puesto(idPuesto),
-    foreign key(idReparticion) references Reparticion(idReparticion)
+    foreign key(idPuesto) references Puesto(idPuesto) ON DELETE CASCADE,
+    foreign key(idReparticion) references Reparticion(idReparticion) ON DELETE CASCADE
     
 );
 
@@ -45,10 +45,22 @@ create table Familiar(
     apellido varchar(45),
     DNI int,
     esConyuge bool,
+    edad int default 0,
     primary key(idFamiliar,idAgente),
     foreign key(idAgente) references Agente(idAgente) ON DELETE CASCADE
 );
 
+
+
+create table Titulo(
+	idTitulo int not null auto_increment,
+    idAgente int,
+    nombreTitulo varchar(40),
+    primary key(idTitulo, idAgente),
+    foreign key(idAgente) references Agente(idAgente) ON DELETE CASCADE
+    
+    );
+    
 
 
 create table Horasextra(
@@ -94,18 +106,18 @@ create table Reparticion(
     
 create table Departamento(
 	idDepartamento int not null auto_increment,
+    jefe int,
     nombre varchar(80),
     interno int,
-    primary key(idDepartamento)
+    primary key(idDepartamento, jefe),
+    foreign key(jefe) references Agente(idAgente) ON DELETE CASCADE
     
     );
-    
-    
+  
 
-select * from Agente;
 
 create view vistaLicencia as
-	select fecha, cantidad, razon, nombre,apellido from
+	select fecha, cantidad, razon, Licencia.idAgente idAgente from
     Agente join Licencia on Agente.idAgente = Licencia.idAgente;
 
 create view vistaReparticion as
@@ -122,13 +134,14 @@ create view vistaEmpleado as
 				join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento
                 join Puesto on Puesto.idPuesto = Agente.idPuesto;
                 
-                
+       drop view vistaJefe;         
 create view vistaJefe as
 	select Reparticion.idReparticion idReparticion, Reparticion.nombre nombreReparticion, Departamento.nombre nombreDepartamento,
     Agente.apellido jefeApellido, Agente.nombre jefeNombre
     from Reparticion join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento
 					 join Agente on Agente.idReparticion = Reparticion.idReparticion
-                     join Puesto on Agente.idPuesto = Puesto.idPuesto;
+                     join Puesto on Agente.idPuesto = Puesto.idPuesto
+                     where Puesto.nombre = 'Jefe';
                      
 
 

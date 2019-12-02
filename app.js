@@ -19,7 +19,7 @@ let mysqlConnection = mysql.createConnection({
     host:'localhost',
     user: 'root',
     password: 'Lapicera123!',
-    database: 'AdministracionTest',
+    database: 'Administracion',
    
 
 });
@@ -53,7 +53,7 @@ app.get('/busquedaempleados',(req,res)=> {
 app.get('/busquedareparticiones',(req,res)=> {
     var result;
     console.log("Entro a BusquedaReparticiones")
-    mysqlConnection.query(`SELECT idReparticion, nombreReparticion, nombreDepartamento FROM vistaReparticion
+    mysqlConnection.query(`SELECT * FROM vistaFinal
                         WHERE LOWER(nombreReparticion) LIKE \'%${req.query.busqueda.toLowerCase()}%\' 
                         ORDER BY nombreReparticion ASC`,(err,result,fields)=>{
         
@@ -110,6 +110,8 @@ app.post('/addempleado/',urlencodedParser,(req,res)=>{
             );
     
     
+
+
     res.redirect('/empleados.html');
 
 });
@@ -159,11 +161,12 @@ app.post('/llegadatarde/',urlencodedParser,(req,res)=>{
 
 app.post('/familiar/',urlencodedParser,(req,res)=>{
     console.log(req.body);
-    mysqlConnection.query(`INSERT INTO Familiar(idAgente, nombre, apellido, DNI, esConyuge)
+    mysqlConnection.query(`INSERT INTO Familiar(idAgente, nombre, apellido, DNI, edad, esConyuge)
     values( '${parseInt(req.body.idEmpleado)}', 
             '${req.body.nombre}',
             '${req.body.apellido}',
             ${parseInt(req.body.dni)},
+            ${parseInt(req.body.edad)},
             ${parseInt(req.body.conyuge)} )`,(err,result,fields)=>{
                 console.log(result);
                 console.log(err);
@@ -330,6 +333,65 @@ app.get('/licenciasempleado',(req,res)=> {
     console.log("Entro a legajoempleado")
     mysqlConnection.query(`SELECT fecha,cantidad,razon
                         FROM vistaLicencia
+                        WHERE idAgente = ${req.query.busqueda}`,(err,result,fields)=>{
+        
+                            res.send(result);
+                            console.log(req.query.busqueda);
+                    
+                        });
+});
+
+
+app.post('/titulo/',urlencodedParser,(req,res)=>{
+    console.log(req.body);
+    
+    mysqlConnection.query(`INSERT INTO Titulo(idAgente, nombreTitulo)
+    values( ${parseInt(req.body.idEmpleado)}, 
+             '${req.body.titulo}' )`,(err,result,fields)=>{
+                console.log(result);
+                console.log(err);
+            }
+            );
+            
+    res.redirect('../addEmpleado.html');
+  
+
+});
+
+
+app.get('/familiaresempleado',(req,res)=> {
+    var result;
+    console.log("Entro a legajoempleado")
+    mysqlConnection.query(`SELECT nombre,apellido,DNI,edad,esConyuge
+                        FROM Familiar
+                        WHERE idAgente = ${req.query.busqueda}`,(err,result,fields)=>{
+        
+                            res.send(result);
+                            console.log(req.query.busqueda);
+                    
+                        });
+});
+
+
+app.get('/titulosempleado',(req,res)=> {
+    var result;
+    console.log("Entro a legajoempleado")
+    mysqlConnection.query(`SELECT nombreTitulo
+                        FROM Titulo
+                        WHERE idAgente = ${req.query.busqueda}`,(err,result,fields)=>{
+        
+                            res.send(result);
+                            console.log(req.query.busqueda);
+                    
+                        });
+});
+
+
+app.get('/inasistenciasempleado',(req,res)=> {
+    var result;
+    console.log("Entro a legajoempleado")
+    mysqlConnection.query(`SELECT fecha,tipo
+                        FROM Inasistencia
                         WHERE idAgente = ${req.query.busqueda}`,(err,result,fields)=>{
         
                             res.send(result);

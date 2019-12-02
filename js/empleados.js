@@ -42,6 +42,7 @@ function buscar(criterio = document.getElementById('buscador').value){
                                           <a class="dropdown-item" href="javascript:abrirFamiliar(${row.idAgente})" >Agregar Familiar</a>
                                           <a class="dropdown-item" href="javascript:abrirHorasExtra(${row.idAgente})" >Agregar Horas Extra</a>
                                           <a class="dropdown-item" href="javascript:abrirLicencia(${row.idAgente})" >Agregar Licencia</a>
+                                          <a class="dropdown-item" href="javascript:abrirTitulo(${row.idAgente})" >Agregar Título</a>
                                           <a class="dropdown-item" href="javascript:abrirAntiguedad(${row.idAgente})" >Antiguedad</a>
                                           <a class="dropdown-item" href="javascript:abrirEstado(${row.idAgente})" >Estado</a>
                                           <a class="dropdown-item" href="#">Boleta de Sueldo</a>
@@ -161,6 +162,12 @@ function abrirLicencia(clicked_id){
 
 }
 
+function abrirTitulo(clicked_id){
+    $("#agregarTituloModal").modal("show");
+    document.getElementById('idEmpleado').value=clicked_id;
+
+}
+
 function abrirAntiguedad(clicked_id){
     $("#antiguedadModal").modal("show");
     document.getElementById('idEmpleado').value=clicked_id;
@@ -180,6 +187,7 @@ function enviarFamiliar(){
     let nombre = document.getElementById('familiarNombre').value;
     let apellido = document.getElementById('familiarApellido').value;
     let dni = document.getElementById('familiarDNI').value;
+    let edad = document.getElementById('familiarEdad').value;
     let idEmpleado = document.getElementById('idEmpleado').value;
     let esConyuge = function(){
         if(document.getElementById("conyugeCheck").checked) return 1;
@@ -208,7 +216,7 @@ function enviarFamiliar(){
     xhttp.open("POST",url,true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.withCredentials=true;
-    xhttp.send(`idEmpleado=${idEmpleado}&nombre=${nombre}&apellido=${apellido}&dni=${dni}&conyuge=${esConyuge()}`);
+    xhttp.send(`idEmpleado=${idEmpleado}&nombre=${nombre}&apellido=${apellido}&dni=${dni}&edad=${edad}&conyuge=${esConyuge()}`);
 
     $("#agregarFamiliarModal").modal("hide");
 
@@ -251,6 +259,42 @@ function enviarHorasExtra(){
     xhttp.send(`idEmpleado=${idEmpleado}&fecha=${fecha}&cantidad=${cantidad}`);
 
     $("#agregarHorasExtraModal").modal("hide");
+
+    
+}
+
+
+function enviarTitulo(){
+
+   
+
+    let titulo= document.getElementById('nombreTitulo').value;
+    let idEmpleado = document.getElementById('idEmpleado').value;
+
+    
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = ()=>{
+        if(xhttp.readyState == 4 && xhttp.status ==200){
+            
+                           
+            };
+            
+        };
+    
+
+
+    let url = new URL(`http://localhost:3000/titulo/`);  //armo la url, esta es la base
+    
+
+
+    console.log(url);
+    
+    xhttp.open("POST",url,true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.withCredentials=true;
+    xhttp.send(`idEmpleado=${idEmpleado}&titulo=${titulo}`);
+
+    $("#agregarTituloModal").modal("hide");
 
     
 }

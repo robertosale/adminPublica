@@ -26,7 +26,7 @@ function buscar(criterio = document.getElementById('buscador').value){
                                 
                                 <td>${row.nombreReparticion} </td>
                                 <td>${row.nombreDepartamento} </td>
-                                <td>${row.apellidoJefe}, ${row.nombreJefe}</td>
+                                <td>${row.jefeApellido}, ${row.jefeNombre}</td>
                                 <td>${row.telefono}</td>
                                 <td><a class="delete" href="javascript:borrar(${row.idReparticion})" aria-haspopup="true"
                                 aria-expanded="false"><i class="material-icons" title="Borrar">delete_forever</i></a></td>

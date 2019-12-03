@@ -399,3 +399,17 @@ app.get('/inasistenciasempleado',(req,res)=> {
                     
                         });
 });
+
+
+app.get('/sueldoempleado',(req,res)=> {
+    var result;
+    console.log("Entro a sueldoempleado");
+    mysqlConnection.query(`SELECT COUNT(idInasistencia) inasistencias
+    FROM Inasistencia join Agente on Agente.idAgente = Inasistencia.idAgente where Agente.idAgente = ${req.query.busqueda}`,(err,result,fields)=>{
+                            console.log(result);
+                            res.send(result);
+                            
+                    
+                        });
+});
+

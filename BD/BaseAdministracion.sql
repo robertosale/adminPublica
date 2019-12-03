@@ -127,10 +127,14 @@ create view vistaLicencia as
     Agente join Licencia on Agente.idAgente = Licencia.idAgente;
 
 create view vistaReparticion as
-	select Reparticion.idReparticion idReparticion, Reparticion.nombre nombreReparticion, Departamento.nombre nombreDepartamento
+	select Reparticion.idReparticion idReparticion, Departamento.idDepartamento, Reparticion.nombre nombreReparticion, Departamento.nombre nombreDepartamento
     from Reparticion join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento;
     
-       
+    
+create view vistaFinal as
+	select vistaReparticion.nombreReparticion nombreReparticion, vistaReparticion.nombreDepartamento nombreDepartamento,
+    jefeApellido, jefeNombre, telefono, vistaReparticion.idReparticion idReparticion
+    from vistaReparticion left join vistaJefe on vistaReparticion.idDepartamento = vistaJefe.idDepartamento;
              
 create view vistaEmpleado as
 	select Agente.idAgente idAgente, Agente.apellido empleadoApellido, Agente.nombre empleadoNombre, Agente.DNI DNI, CUIL,
@@ -142,12 +146,14 @@ create view vistaEmpleado as
                 
                 drop view vistaJefe;
                 
+                
 create view vistaJefe as
-	select Reparticion.idReparticion idReparticion, Reparticion.nombre nombreReparticion, Departamento.nombre nombreDepartamento,
-    Agente.apellido jefeApellido, Agente.nombre jefeNombre
+	select Reparticion.idDepartamento idDepartamento, Reparticion.nombre nombreReparticion, Departamento.nombre nombreDepartamento,
+    Agente.apellido jefeApellido, Agente.nombre jefeNombre, telefono
     from Reparticion join Departamento on Departamento.idDepartamento = Reparticion.idDepartamento
 					 join Agente on Agente.idReparticion = Reparticion.idReparticion
-                     join Puesto on Agente.idPuesto = Puesto.idPuesto;
+                     join Puesto on Agente.idPuesto = Puesto.idPuesto
+                     where Puesto.nombre = 'Jefe';
                      
 
                      

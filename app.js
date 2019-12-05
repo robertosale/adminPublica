@@ -408,7 +408,7 @@ app.get('/sueldoempleado',(req,res)=> {
     FROM Inasistencia join Agente on Agente.idAgente = Inasistencia.idAgente where Agente.idAgente = ${req.query.busqueda}`,(err,result,fields)=>{
                             console.log(result);
                             res.send(result);
-                            
+                            //
                     
                         });
 });
